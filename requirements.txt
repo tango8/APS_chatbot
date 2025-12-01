@@ -1,0 +1,7 @@
+langchain
+pinecone-client
+python-dotenv
+google-genai
+google-auth
+google-auth-oauthlib
+google-cloud-aiplatform
