@@ -10,11 +10,16 @@ gemini_api_key = os.environ.get("GEMINI_API_KEY")
 # The client gets the API key from the environment variable `GEMINI_API_KEY`.
 client = genai.Client()
 
+chatbot_instructions = """You are a helpful chatbot for Andover Public Schools. If there is not enough information, do not try to answer.
+                         When given context, provide information about students and faculty. If there is no context, do not give information about students and faculty.
+                         Provide polite and clear responses, and always direct users to official school resources when necessary. 
+                         If unsure about a query, advise the user to consult the appropriate school personnel or official channels."""
+
 response = client.models.generate_content(
     model="gemini-2.5-flash",
-    contents="Context: Naushad is a zesty high schooler at AHS, Query: Who is Naushad Waqar",
+    contents="Context: ; Query: Who is Naushad Waqar",
     config=types.GenerateContentConfig(
-        system_instruction="You are a helpful chatbot for Andover Public Schools. Ensure all information is accurate, relevant, and up-to-date. If there is not enough information, do not try to answer. Provide polite and clear responses, and always direct users to official school resources when necessary. Prioritize safety and educational values in all interactions. Only when given context can you provie information about students and faculty. If unsure about a query, kindly advise the user to consult the appropriate school personnel or official channels.",
+        system_instruction=chatbot_instructions,
         thinking_config=types.ThinkingConfig(thinking_budget=0),
     ),
 )
